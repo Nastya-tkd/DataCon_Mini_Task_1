@@ -9,7 +9,7 @@ from tqdm import tqdm
 def get_pubchem_data(compound_name):
     base_url = "https://pubchem.ncbi.nlm.nih.gov/rest/pug"
 
-    # 1. Получаем CID по названию соединения
+   
     cid_url = f"{base_url}/compound/name/{compound_name}/cids/JSON"
     try:
         response = requests.get(cid_url, timeout=30)
@@ -19,14 +19,14 @@ def get_pubchem_data(compound_name):
         print(f"Error getting CID for {compound_name}: {str(e)}")
         return None
 
-    # 2. Получаем все данные через PUG View
+   
     pug_view_url = f"{base_url}/compound/cid/{cid}/JSON"
     try:
         response = requests.get(pug_view_url, timeout=30)
         response.raise_for_status()
         data = response.json()
 
-        # Инициализируем результат
+        
         result = {
             'compound_name': compound_name,
             'pubchem_cid': cid,
@@ -38,11 +38,11 @@ def get_pubchem_data(compound_name):
             'source': 'PubChem'
         }
 
-        # Извлекаем данные из ответа
+        
         if 'PC_Compounds' in data and len(data['PC_Compounds']) > 0:
             compound = data['PC_Compounds'][0]
 
-            # Извлекаем SMILES
+            
             if 'props' in compound:
                 for prop in compound['props']:
                     urn = prop.get('urn', {})
@@ -68,14 +68,14 @@ def get_pubchem_data(compound_name):
         return None
 
 
-# Список препаратов
+
 drug_names = [
     "Aspirin", "Ibuprofen", "Paracetamol", "Metformin", "Atorvastatin",
     "Omeprazole", "Sertraline", "Warfarin", "Diazepam", "Lisinopril",
     "Simvastatin", "Amoxicillin", "Ciprofloxacin", "Prednisone", "Hydrochlorothiazide"
 ]
 
-# Собираем данные
+
 results = []
 for name in tqdm(drug_names, desc="Fetching data"):
     data = get_pubchem_data(name)
@@ -83,12 +83,12 @@ for name in tqdm(drug_names, desc="Fetching data"):
         results.append(data)
     time.sleep(1)  # Ограничение запросов
 
-# Создаем DataFrame
+
 df = pd.DataFrame(results)
 print(f"\nSuccessfully retrieved data for {len(df)} compounds")
 
 
-# Канонизация SMILES с помощью RDKit
+
 def canonicalize_smiles(smiles):
     if pd.isna(smiles) or not smiles:
         return None
@@ -104,7 +104,7 @@ if not df.empty:
     df['isomeric_smiles'] = df['isomeric_smiles'].apply(canonicalize_smiles)
 
 
-    # Вычисляем молекулярную массу из SMILES, если она отсутствует
+    
     def calculate_mw(smiles):
         if pd.isna(smiles):
             return None
@@ -118,7 +118,7 @@ if not df.empty:
     if 'molecular_weight' not in df.columns or df['molecular_weight'].isna().any():
         df['molecular_weight'] = df['canonical_smiles'].apply(calculate_mw)
 
-# Сохраняем результаты
+
 output_file = "pubchem_compounds.csv"
 df.to_csv(output_file, index=False)
 print(f"Data saved to {output_file}")
