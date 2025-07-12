@@ -1,0 +1,16 @@
+compound_name,pubchem_cid,canonical_smiles,isomeric_smiles,inchi_key,molecular_weight,iupac_name,source
+Aspirin,2244,,,BSYNRYMUTXBXSQ-UHFFFAOYSA-N,,2-acetoxybenzoic acid,PubChem
+Ibuprofen,3672,,,HEFNNWSXXWATRW-UHFFFAOYSA-N,,2-(4-isobutylphenyl)propionic acid,PubChem
+Paracetamol,1983,,,RZVAJINKPMORJF-UHFFFAOYSA-N,,N-(4-hydroxyphenyl)acetamide,PubChem
+Metformin,4091,,,XZWYZXLIPXDOLR-UHFFFAOYSA-N,,"3-(diaminomethylene)-1,1-dimethyl-guanidine",PubChem
+Atorvastatin,60823,,,XUKUURHRXDUEBC-KAYWLYCHSA-N,,"(3R,5R)-7-[2-(4-fluorophenyl)-5-isopropyl-3-phenyl-4-(phenylcarbamoyl)pyrrol-1-yl]-3,5-dihydroxy-enanthic acid",PubChem
+Omeprazole,4594,,,SUBDBMMJDZJVOS-UHFFFAOYSA-N,,"6-methoxy-2-[(4-methoxy-3,5-dimethyl-2-pyridyl)methylsulfinyl]-1H-benzimidazole",PubChem
+Sertraline,68617,,,VGKDLMBJGBXTGI-SJCJKPOMSA-N,,"[(1S,4S)-4-(3,4-dichlorophenyl)tetralin-1-yl]-methyl-amine",PubChem
+Warfarin,54678486,,,PJVWKTKQMONHTI-UHFFFAOYSA-N,,warfarin,PubChem
+Diazepam,3016,,,AAOVKJBEBIDNHE-UHFFFAOYSA-N,,"7-chloro-1-methyl-5-phenyl-3H-1,4-benzodiazepin-2-one",PubChem
+Lisinopril,5362119,,,RLAWWYSOJDYHDC-BZSNNMDCSA-N,,(2S)-1-[(2S)-6-amino-2-[[(1S)-1-carboxy-3-phenyl-propyl]amino]hexanoyl]proline,PubChem
+Simvastatin,54454,,,RYMZZMVNJRMUDD-HGQWONQESA-N,,"2,2-dimethylbutyric acid [(1S,3R,7S,8S,8aR)-8-[2-[(2R,4R)-4-hydroxy-6-keto-tetrahydropyran-2-yl]ethyl]-3,7-dimethyl-1,2,3,7,8,8a-hexahydronaphthalen-1-yl] ester",PubChem
+Amoxicillin,33613,,,LSQZJLSUYDQPKJ-NJBDSQKTSA-N,,"(2S,5R,6R)-6-[[(2R)-2-amino-2-(4-hydroxyphenyl)acetyl]amino]-7-keto-3,3-dimethyl-4-thia-1-azabicyclo[3.2.0]heptane-2-carboxylic acid",PubChem
+Ciprofloxacin,2764,,,MYSWGUAQZAJSOK-UHFFFAOYSA-N,,1-cyclopropyl-6-fluoro-4-keto-7-piperazino-quinoline-3-carboxylic acid,PubChem
+Prednisone,5865,,,XOFYZVNMUHMLCC-ZPOLXVRWSA-N,,"(8S,9S,10R,13S,14S,17R)-17-glycoloyl-17-hydroxy-10,13-dimethyl-6,7,8,9,12,14,15,16-octahydrocyclopenta[a]phenanthrene-3,11-quinone",PubChem
+Hydrochlorothiazide,3639,,,JZUFKLXOESDKRF-UHFFFAOYSA-N,,"6-chloro-1,1-diketo-3,4-dihydro-2H-1lambda6,2,4-benzothiadiazine-7-sulfonamide",PubChem
