@@ -9,7 +9,7 @@ from tqdm import tqdm
 def get_pubchem_data(compound_name):
     base_url = "https://pubchem.ncbi.nlm.nih.gov/rest/pug"
 
-    # 1. Получаем CID по названию соединения
+    
     cid_url = f"{base_url}/compound/name/{compound_name}/cids/JSON"
     try:
         response = requests.get(cid_url, timeout=30)
@@ -19,7 +19,7 @@ def get_pubchem_data(compound_name):
         print(f"Error getting CID for {compound_name}: {str(e)}")
         return None
 
-    # 2. Получаем данные через PUG View
+   
     pug_view_url = f"{base_url}/compound/cid/{cid}/JSON"
     try:
         response = requests.get(pug_view_url, timeout=30)
@@ -66,14 +66,14 @@ def get_pubchem_data(compound_name):
         return None
 
 
-# Список препаратов
+
 drug_names = [
     "Aspirin", "Ibuprofen", "Paracetamol", "Metformin", "Atorvastatin",
     "Omeprazole", "Sertraline", "Warfarin", "Diazepam", "Lisinopril",
     "Simvastatin", "Amoxicillin", "Ciprofloxacin", "Prednisone", "Hydrochlorothiazide"
 ]
 
-# Собираем данные
+
 results = []
 for name in tqdm(drug_names, desc="Fetching data"):
     data = get_pubchem_data(name)
@@ -81,12 +81,12 @@ for name in tqdm(drug_names, desc="Fetching data"):
         results.append(data)
     time.sleep(1)
 
-# Создаем DataFrame
+
 df = pd.DataFrame(results)
 print(f"\nSuccessfully retrieved data for {len(df)} compounds")
 
 
-# Функция для расчета молекулярной массы
+
 def calculate_molecular_weight(smiles):
     if pd.isna(smiles) or not smiles:
         return None
@@ -97,7 +97,7 @@ def calculate_molecular_weight(smiles):
         return None
 
 
-# Добавляем/обновляем молекулярную массу
+
 df['molecular_weight'] = df.apply(
     lambda row: row['molecular_weight'] if not pd.isna(row['molecular_weight'])
     else calculate_molecular_weight(row['canonical_smiles']),
@@ -105,7 +105,7 @@ df['molecular_weight'] = df.apply(
 )
 
 
-# Канонизация SMILES
+
 def canonicalize_smiles(smiles):
     if pd.isna(smiles) or not smiles:
         return None
@@ -119,13 +119,13 @@ def canonicalize_smiles(smiles):
 df['canonical_smiles'] = df['canonical_smiles'].apply(canonicalize_smiles)
 df['isomeric_smiles'] = df['isomeric_smiles'].apply(canonicalize_smiles)
 
-# Проверка данных
+
 print("\nData quality check:")
 print(f"Missing molecular weights: {df['molecular_weight'].isna().sum()}")
 print("\nSample data:")
 print(df[['compound_name', 'molecular_weight']].head())
 
-# Сохраняем результаты
+
 output_file = "pubchem_compounds_final.csv"
 df.to_csv(output_file, index=False)
 print(f"\nData saved to {output_file}")
